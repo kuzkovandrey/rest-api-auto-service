@@ -1,22 +1,24 @@
+import { UserDto } from './dto/user.dto';
+import { AuthService } from './auth.service';
 import { 
   Controller, 
   Request, 
   Post, 
   UseGuards 
 } from '@nestjs/common';
-import { EndPoint } from './../../enums/end-point.enum';
+import { EndPoint } from '@enums/end-point.enum';
 import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
-@Controller('auth')
+@Controller(EndPoint.AUTH)
 export class AuthController {
-  @UseGuards(AuthGuard('local'))
+
+  constructor(private authService: AuthService) {}
+
+  @UseGuards(LocalAuthGuard)
   @Post(EndPoint.LOGIN)
   async login(@Request() req) {
-    return 'Login';
+    return req.user;
   }
 
-  @Post(EndPoint.REGISTER)
-  async register(@Request() req) {
-    return 'Register';
-  }
 }

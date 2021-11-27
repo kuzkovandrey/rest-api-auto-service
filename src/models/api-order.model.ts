@@ -14,7 +14,7 @@ export interface ApiOrder {
   };
 }
 
-const order: ApiOrder = {
+const mock: ApiOrder = {
   "cost": 100,
   "personId": "61a13a80876822827fcb9c7d",
   "partsId": [
@@ -31,4 +31,4 @@ const order: ApiOrder = {
     "model": "Test1 car model",
     "year": 1995
   }
-}
+};

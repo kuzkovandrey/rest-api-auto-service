@@ -5,7 +5,7 @@ import { CarDto } from './../../client/dto/car.dto';
 import { ClientService } from './../../client/services/client.service';
 import { CarService } from './../../client/services/car.service';
 import { MaintenanceService } from './maintenance.service';
-import { ApiOrder } from './../../../models/api-order.model';
+import { ApiOrder } from '@models/api-order.model';
 import { Order, OrderDocument } from './../schemas/order.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
@@ -20,6 +20,15 @@ export class OrderService {
     private clientService: ClientService
   ) {}
 
+  async saveOrder(order: ApiOrder): Promise<OrderModel> {
+    const preparedOrder = await this.prepareOrder(order);
+    const createdOrder = new this.orderModel(preparedOrder);
+    return createdOrder.save();
+  }
+
+  // async getAllOrders(): Promise<OrderModel[]> {
+  //   return this.orderModel.find().exec();
+  // }
 
   private async createMaintenance(
     partsId: string[], 
@@ -56,15 +65,11 @@ export class OrderService {
       maintenanceId,
       clientId,
       personId: order.personId,
-      date: new Date().toString(),
+      date: new Date().getMonth().toString(),
       cost: order.cost
     } as OrderDto;
   }
 
-  async saveOrder(order: ApiOrder): Promise<OrderModel> {
-    const preparedOrder = await this.prepareOrder(order);
-    const createdOrder = new this.orderModel(preparedOrder);
-    return createdOrder.save();
-  }
+  
 
 }

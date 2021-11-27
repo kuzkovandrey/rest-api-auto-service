@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';
 import {
   Controller,
   Post,
@@ -7,6 +8,7 @@ import {
   Get,
   Delete,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { PersonalService } from './personal.service';
 import { PersonalDto } from './dto/personal.dto';
@@ -17,12 +19,14 @@ import { PersonalModel } from './models/personal.model';
 export class PersonalController {
   constructor(private personalService: PersonalService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createPerson(@Body() person: PersonalDto): Promise<PersonalModel> {
     return this.personalService.create(person);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deletePerson(@Param('id') id: string): Promise<PersonalModel> {
     return this.personalService.delete(id);

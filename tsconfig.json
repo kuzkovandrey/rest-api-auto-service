@@ -13,7 +13,7 @@
     "paths": {
       "@enums/*": ["src/enums/*"],
       "@models/*": ["src/models/*"],
-      "@dto/*": ["src/dto/*"]
+      "@configs/*": ["src/configs/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

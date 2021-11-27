@@ -12,6 +12,8 @@ import { OrderController } from './order.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
 import { ClientModule } from './../client/client.module';
+import { OrderInfoService } from './services/order-info.service';
+import { OrderInfoController } from './order-info.controller';
 
 @Module({
   imports: [
@@ -24,10 +26,12 @@ import { ClientModule } from './../client/client.module';
     ClientModule
   ],
   controllers: [
-    OrderController
+    OrderController,
+    OrderInfoController
   ],
   providers: [
     OrderService,
+    OrderInfoService,
     PartService,
     PriceService,
     MaintenanceService
