@@ -12,6 +12,8 @@ export class CarService {
   ) {}
 
   async createCar(car: CarDto): Promise<CarModel> {
+    const findedCar = await this.findCar(car);
+    if (findedCar) return findedCar;
     const createdCar = new this.carModel(car);
     return createdCar.save();
   }
@@ -20,4 +22,12 @@ export class CarService {
     return this.carModel.find().exec();
   }
 
+  private async findCar(car: CarDto): Promise<CarModel> {
+    const findedCar = await this.carModel.findOne({
+      stateNumber: car.stateNumber,
+      model: car.model,
+      year: car.year
+    }); 
+    return findedCar;
+  }
 }

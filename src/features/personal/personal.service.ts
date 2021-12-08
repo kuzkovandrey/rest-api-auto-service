@@ -23,4 +23,9 @@ export class PersonalService {
   async getAll(): Promise<PersonalModel[]> {
     return this.personalModel.find().exec();
   }
+
+  async changePerson(_id: string, update: PersonalDto): Promise<PersonalModel> {
+    return this.personalModel.findOneAndUpdate({ _id }, update);
+
+  }
 }

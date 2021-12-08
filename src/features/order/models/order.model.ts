@@ -4,6 +4,6 @@ export interface OrderModel extends DBEntityModel {
   maintenanceId: string;
   clientId: string;
   personId: string;
-  date: string;
+  date: Date;
   cost: number;
 }

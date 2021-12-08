@@ -9,6 +9,7 @@ import {
   Delete,
   Param,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 import { PersonalService } from './personal.service';
 import { PersonalDto } from './dto/personal.dto';
@@ -36,4 +37,14 @@ export class PersonalController {
   async getAllPersons(): Promise<PersonalModel[]> {
     return this.personalService.getAll();
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  async changePerson(
+    @Param('id') id: string,
+    @Body() person: PersonalDto
+  ): Promise<PersonalModel> {
+    return this.personalService.changePerson(id, person);
+  }
+
 }

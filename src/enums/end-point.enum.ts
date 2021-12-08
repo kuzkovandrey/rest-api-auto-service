@@ -8,5 +8,8 @@ export enum EndPoint {
   ORDER_INFO = 'order-info',
   PARTS = 'parts',
   SERVICE = 'service',
-  CREATE = 'create'
+  CREATE = 'create',
+  CLIENT = 'client',
+  CAR = 'car',
+  SALARY = 'salary'
 };

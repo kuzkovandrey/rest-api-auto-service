@@ -8,7 +8,7 @@ export class Order {
   @Prop({ required: true }) maintenanceId: string;
   @Prop({ required: true }) clientId: string;
   @Prop({ required: true }) personId: string;
-  @Prop({ required: true }) date: string;
+  @Prop({ required: true }) date: Date;
   @Prop({ required: true }) cost: number;
 }
 

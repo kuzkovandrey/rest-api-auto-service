@@ -1,4 +1,4 @@
 export class PersonalDto {
-  readonly name: string;
-  readonly rate: number;
+  readonly name?: string;
+  readonly rate?: number;
 }

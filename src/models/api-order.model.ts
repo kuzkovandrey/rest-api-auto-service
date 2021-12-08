@@ -1,8 +1,8 @@
 export interface ApiOrder {
   cost: number;
-  personId: string;
-  partsId: string[];
-  priceListId: string;
+  personId?: string;
+  partsId?: string[];
+  priceListId?: string;
   client: {
     name: string;
     email: string;
@@ -12,6 +12,8 @@ export interface ApiOrder {
     model: string;
     year: number;
   };
+  date?: Date;
+  orderId?: string;
 }
 
 const mock: ApiOrder = {
