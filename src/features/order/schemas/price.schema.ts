@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 export type PriceDocument = Price & Document;
 
 @Schema()
-export class Price {
+export class Price extends Document {
   @Prop({ required: true }) description: string;
   @Prop({ required: true }) cost: number;
 }

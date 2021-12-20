@@ -5,9 +5,9 @@ export type CarDocument = Car & Document;
 
 @Schema()
 export class Car {
-  @Prop({ required: true }) stateNumber: string;
-  @Prop({ required: true }) model: string;
-  @Prop({ required: true }) year: number;
+  @Prop({ required: true, unique: true }) stateNumber: string;
+  @Prop({ required: true, unique: true }) model: string;
+  @Prop({ required: true, unique: true }) year: number;
 }
 
 export const CarSchema = SchemaFactory.createForClass(Car);

@@ -1,6 +1,5 @@
-import { Client } from './../../client/schemas/client.schema';
+//TODO: Alias
 import { OrderModel } from './../models/order.model';
-import { OrderDto } from './../dto/order.dto';
 import { ClientDto } from './../../client/dto/client.dto';
 import { CarDto } from './../../client/dto/car.dto';
 import { ClientService } from './../../client/services/client.service';
@@ -9,8 +8,8 @@ import { MaintenanceService } from './maintenance.service';
 import { ApiOrder } from '@models/api-order.model';
 import { Order, OrderDocument } from './../schemas/order.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Injectable, Type } from '@nestjs/common';
-import { Model, Types, ObjectId} from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { Model, Types} from 'mongoose';
 
 @Injectable()
 export class OrderService {
@@ -48,7 +47,8 @@ export class OrderService {
     return createdClient._id;
   }
 
-  private async prepareOrder(order: ApiOrder): Promise<OrderDto> {
+  //TODO: REFACTORING
+  private async prepareOrder(order: ApiOrder): Promise<any> {
     const maintenanceId = await this.createMaintenance(
       order.partsId,
       order.priceListId
@@ -61,10 +61,10 @@ export class OrderService {
     return {
       maintenanceId,
       clientId,
-      personId: order.personId,
+      personId: new Types.ObjectId(order.personId),
       date: new Date,
       cost: order.cost
-    } as OrderDto;
+    };
   }
 
 }

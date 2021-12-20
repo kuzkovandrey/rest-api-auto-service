@@ -5,7 +5,7 @@ export type PersonalDocument = Personal & Document;
 
 @Schema()
 export class Personal {
-  @Prop({ required: true }) name: string;
+  @Prop({ required: true, unique: true }) name: string;
   @Prop({ required: true }) rate: number;
 }
 

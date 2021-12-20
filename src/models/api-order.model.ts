@@ -1,3 +1,5 @@
+import { Schema as MongooseSchema } from 'mongoose';
+
 export interface ApiOrder {
   cost: number;
   personId?: string;

@@ -2,7 +2,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PersonalDto } from './dto/personal.dto';
 import { Injectable } from '@nestjs/common';
 import { Personal, PersonalDocument } from './schemas/personal.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { PersonalModel } from './models/personal.model';
 
 @Injectable()
@@ -24,8 +24,10 @@ export class PersonalService {
     return this.personalModel.find().exec();
   }
 
-  async changePerson(_id: string, update: PersonalDto): Promise<PersonalModel> {
+  async changePerson(
+    _id: string, 
+    update: PersonalDto
+  ): Promise<PersonalModel> {
     return this.personalModel.findOneAndUpdate({ _id }, update);
-
   }
 }

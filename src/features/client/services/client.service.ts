@@ -3,7 +3,7 @@ import { ClientDto } from './../dto/client.dto';
 import { Client, ClientDocument } from './../schemas/client.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class ClientService {
@@ -12,7 +12,10 @@ export class ClientService {
   ) {}
 
   async createClient(client: ClientDto): Promise<ClientModel> {
-    const createdClient = new this.clientModel(client);
+    const createdClient = new this.clientModel({
+      ...client,
+      carId: new Types.ObjectId(client.carId)
+    });
     return createdClient.save();
   }
 

@@ -3,7 +3,7 @@ import { MaintenanceDto } from '../dto/maintenance.dto';
 import { Maintenance, MaintenanceDocument } from '../schemas/maintenance.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class MaintenanceService {
@@ -12,7 +12,10 @@ export class MaintenanceService {
   ) {}
 
   async createMaintenance(maintenance: MaintenanceDto): Promise<MaintenanceModel> {
-    const createdMaintenance = new this.maintenanceModel(maintenance);
+    const createdMaintenance = new this.maintenanceModel({
+      priceListId: new Types.ObjectId(maintenance.priceListId),
+      partsId: maintenance.partsId.map(id => new Types.ObjectId(id))
+    });
     return createdMaintenance.save();
   } 
 
